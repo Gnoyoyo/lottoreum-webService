@@ -2,6 +2,13 @@ import Web3 from "web3";
 import abi from "./abi.json";
 import Emoji from "emoji-js"
 import emoji from "./emoji.json"
+import {getNonce, hexFormatForTrezor} from './ethereumHelper'
+import EthereumTx from 'ethereumjs-tx'
+
+const wallet = {
+  publicKey: '0x5305a8CE096064dc11dA18556D7DA7dC86b5bE7f',
+  privateKey: '6b6fd1d511cd8efaa99e9f89abb841da53aed67f2ad7ac370012d3a79cee02df'
+}
 
 export default class LottoReum {
   constructor() {
@@ -10,6 +17,49 @@ export default class LottoReum {
     this.web3 = new Web3(web3js.currentProvider);
     this.contract = new this.web3.eth.Contract(abi, this.address);
     this.emoji = new Emoji()
+    this.EthereumTx = EthereumTx
+  }
+
+  async newPlayerWithLocalKey(number, power) {
+    let address = wallet.publicKey
+    var privateKey = Buffer.from(wallet.privateKey, 'hex')
+
+    let data = this.contract.methods.newPlayer(number, power).encodeABI()
+
+    let nonce = await getNonce(this.web3, address)
+    console.log('nonce: ', nonce );
+
+    var rawTx = {
+        nonce: '0x' + hexFormatForTrezor( this.web3.utils.toHex(nonce) ),
+        gasPrice: '0x174876E800', // 10 gwei = 0x02540BE400,  25 gwei = 5D21DBA00,   50 gwei = BA43B7400,   100 gwei = 174876E800
+        gasLimit: '0x1F47D0',
+        to: '0x4128f0274cd7794ac18d9c07ff1041e06e91d87f',
+        value: '0x00',
+        data: data,
+        // EIP 155 chainId - mainnet: 1, ropsten: 3
+        chainId: 3
+    }
+
+    const tx = new EthereumTx(rawTx)
+    tx.sign(privateKey)
+
+    var serializedTx = tx.serialize();
+
+    this.web3.eth.sendSignedTransaction('0x' + serializedTx.toString('hex'))
+    .on('error', function(error){
+        console.log(error);
+    })
+    .on('transactionHash', function(transactionHash){
+        console.log('transactionHash: ' + transactionHash);
+    })
+    .on('receipt', function(receipt){
+        newContractAddress = receipt.contractAddress;
+        console.log('receipt.contractAddress'  + receipt.contractAddress) // contains the new contract address
+    })
+    .on('confirmation', function(confirmationNumber, receipt){
+        // console.log('confirmationNumber: ' + confirmationNumber);
+        // console.log('receipt: ' + receipt);
+    })
   }
 
   getAccounts() {
