@@ -1,6 +1,5 @@
 import Web3 from "web3";
 import abi from "./abi.json";
-import Emoji from "emoji-js"
 import emoji from "./emoji.json"
 import {getNonce, hexFormatForTrezor} from './ethereumHelper'
 import EthereumTx from 'ethereumjs-tx'
@@ -16,7 +15,6 @@ export default class LottoReum {
     const web3js = window.web3;
     this.web3 = new Web3(web3js.currentProvider);
     this.contract = new this.web3.eth.Contract(abi, this.address);
-    this.emoji = new Emoji()
     this.EthereumTx = EthereumTx
   }
 
