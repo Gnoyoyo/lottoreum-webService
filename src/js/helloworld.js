@@ -28,6 +28,19 @@ export default class HelloWorld {
   getContract(abi, address) {
     return this.contract
   }
+
+  async getLottoNumber(){
+     let lottoNumber = await this.contract.methods.playerCount().call()
+     return lottoNumber
+  }
+
+  async getPlayers(){
+    const lottoCount = await this.getLottoNumber()
+    const players = await this.contract.methods.players().call()
+    return players
+
+  }
+
   async getOptions() {
     let accounts = await this.getAccounts()
     const options = {
