@@ -6,15 +6,24 @@
         <div class="column is-half is-narrow">
       <b-table
           :data="players"
-          :columns="columns"
           :row-class="(row, index) => row.lotto_number === '97' && 'is-info' ">
+              <template slot-scope="props">
+                <b-table-column field="id" label="ID" width="15" numeric>
+                   <emoji :emoji="props.row.avatar" set="emojione"></emoji>
+                </b-table-column>
+                <b-table-column field="lotto_number" label="Lotto Number" width="40" numeric>
+                    {{ props.row.lotto_number}}
+                </b-table-column>
+              </template>
       </b-table>
     </div>
      </div>
+
   </div>
 </template>
 <script>
 import Lottereum from "./../js/lottoreum";
+
 export default {
   name: "LotteReum",
   data() {
@@ -26,18 +35,20 @@ export default {
       players: [],
       columns: [
         {
-          field: "id",
+          field: "avatar",
           label: "ID",
           width: "40",
           numeric: true,
-           centered: true
+          centered: true,
+          renderHtml: true
         },
         {
           field: "lotto_number",
           label: "Number",
           centered: true
         }
-      ]
+      ],
+      emoji: null
     };
   },
   methods: {
@@ -45,22 +56,23 @@ export default {
       this.players = await this.app.getPlayers();
     },
     startGetPlayers() {
-      setInterval(async () => {
+     setInterval(async () => {
         this.getPlayers();
-      }, 1000);
+     }, 1000);
     }
   },
   async mounted() {
     this.app = new Lottereum();
     this.startGetPlayers();
+
   }
 };
 </script>
 
 <style>
 tr.is-info {
-    background: #167df0;
-    color: #fff;
+  background: #167df0;
+  color: #fff;
 }
 </style>
 
@@ -82,6 +94,4 @@ li {
 a {
   color: #42b983;
 }
-
-
 </style>
