@@ -8,10 +8,10 @@
           :data="players"
           :row-class="(row, index) => row.lotto_number === '97' && 'is-info' ">
               <template slot-scope="props">
-                <b-table-column field="id" label="ID" width="15" numeric>
+                <b-table-column field="id" label="Player" width="15" centered="true">
                    <emoji :emoji="props.row.avatar" set="emojione"></emoji>
                 </b-table-column>
-                <b-table-column field="lotto_number" label="Lotto Number" width="40" numeric>
+                <b-table-column field="lotto_number" label="Lotto Number" width="40" numeric centered="true">
                     {{ props.row.lotto_number}}
                 </b-table-column>
               </template>
