@@ -84,7 +84,7 @@
 </template>
 
 <script>
-import HelloWorld from "./helloworld"
+import HelloWorld from "./../js/helloworld"
 const app = new HelloWorld()
 app.test()
 export default {

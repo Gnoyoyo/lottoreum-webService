@@ -2,11 +2,6 @@ import Web3 from "web3"
 import * as  abi from "./abi.json"
 export default class HelloWorld {
   constructor() {
-    //  this.web3 =  new Web3(
-    //     new Web3.providers.HttpProvider(
-    //       "https://ropsten.infura.io/8kkr6X3gKuB8cURFQsfa"
-    //     )
-    //   )
     this.address = "0x6349266409b761810E8e79619B4BaDe9451a98bB"
     const web3js = window.web3
     this.web3 = new Web3(web3js.currentProvider)
