@@ -84,6 +84,8 @@
 </template>
 
 <script>
+import HelloWorld from "./helloworld"
+const app = new HelloWorld()
 export default {
   name: 'HelloWorld',
   data () {
