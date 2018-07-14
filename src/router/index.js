@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
+import LottoReum from '@/components/LottoReum'
+import AddNewPlayer from '@/components/AddNewPlayer'
 
 Vue.use(Router)
 
@@ -8,8 +9,13 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
-    }
+      name: 'LottoReum',
+      component: LottoReum
+    },
+    {
+      path: '/add_user',
+      name: 'AddUser',
+      component: AddNewPlayer
+     }
   ]
 })

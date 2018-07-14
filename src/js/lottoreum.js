@@ -1,6 +1,6 @@
 import Web3 from "web3"
 import abi from "./abi.json"
-export default class HelloWorld {
+export default class LottoReum {
   constructor() {
     this.address = "0x4128f0274cd7794ac18D9C07fF1041e06e91d87f"
     const web3js = window.web3
@@ -36,13 +36,13 @@ export default class HelloWorld {
 
   async getPlayers(){
     const lottoCount = await this.getLottoNumber()
-    console.log(lottoCount)
+   // console.log(lottoCount)
     let players = []
     for( let i= 0; i<lottoCount ;i++)
     {
-      players.push(await this.contract.methods.players(i).call())
+      players.push({ id: i , lotto_number:  await this.contract.methods.players(i).call() })
     }
-    console.log(players)
+    //console.log(players)
     return players
   }
 

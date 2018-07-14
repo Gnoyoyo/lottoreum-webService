@@ -1,7 +1,5 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-      <div class="columns is-mobile is-centered">
+ <div class="columns is-mobile is-centered">
         <div class="column is-half is-narrow">
             <b-field label="Temperature">
                 <b-input type="number" v-model="temp"></b-input>
@@ -18,54 +16,32 @@
             </button>
         </div>
       </div>
-        <div v-for="item in players" :key="item.id">
-            <section class="columns is-centered">
-                <b-message>
-                    {{ item.lotto_number }}
-                </b-message>
-             </section>
-        </div>
-    </div>
+
 </template>
+
 <script>
-import HelloWorld from "./../js/helloworld"
+import LottoReum from "@/js/lottoreum"
 export default {
-  name: 'HelloWorld',
+  name: 'Lottereum',
   data () {
     return {
-      msg: 'Welcome to Lottereum',
-      app: new HelloWorld(),
+      app: null,
       temp: 0,
       power:0,
-      players:[ ],
     }
   },
   methods: {
     addNewPlayer() {
       this.app.newPlayer(this.temp,this.power)
-    },
-    getPlayers() {
-      this.app.getPlayers()
     }
+  },
+  async mounted() {
+    this.app = new LottoReum()
   },
 
  }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h1, h2 {
-  font-weight: normal;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
+<style>
+
 </style>
