@@ -22,7 +22,7 @@
 <script>
 import LottoReum from "@/js/lottoreum"
 export default {
-  name: 'Lottereum',
+  name: 'AddNewPlayer',
   data () {
     return {
       app: null,

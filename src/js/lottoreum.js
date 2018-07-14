@@ -49,7 +49,8 @@ export default class LottoReum {
   async getOptions() {
     let accounts = await this.getAccounts()
     const options = {
-      from: accounts[0]
+      from: accounts[0],
+      gas: 90000
     }
    return options
   }
