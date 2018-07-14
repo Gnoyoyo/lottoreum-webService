@@ -12,9 +12,13 @@
             <button class="button is-medium is-primary" @click="addNewPlayer()">
                   Add New Player
             </button>
+
+              <button class="button is-medium is-primary" @click="getPlayers()">
+                  getPlayers
+            </button>
         </div>
       </div>
-        <div v-for="item in users" :key="item.id">
+        <div v-for="item in players" :key="item.id">
             <section class="columns is-centered">
                 <b-message>
                     {{ item.lotto_number }}
@@ -39,6 +43,9 @@ export default {
   methods: {
     addNewPlayer() {
       this.app.newPlayer(this.temp,this.power)
+    },
+    getPlayers() {
+      this.app.getPlayers()
     }
   },
 

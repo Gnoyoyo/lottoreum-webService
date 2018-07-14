@@ -36,9 +36,14 @@ export default class HelloWorld {
 
   async getPlayers(){
     const lottoCount = await this.getLottoNumber()
-    const players = await this.contract.methods.players().call()
+    console.log(lottoCount)
+    let players = []
+    for( let i= 0; i<lottoCount ;i++)
+    {
+      players.push(await this.contract.methods.players(i).call())
+    }
+    console.log(players)
     return players
-
   }
 
   async getOptions() {
