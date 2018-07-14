@@ -10,12 +10,20 @@ const wallet = {
 }
 
 export default class LottoReum {
-  constructor() {
-    this.address = "0x4128f0274cd7794ac18D9C07fF1041e06e91d87f";
-    const web3js = window.web3;
-    this.web3 = new Web3(web3js.currentProvider);
-    this.contract = new this.web3.eth.Contract(abi, this.address);
-    this.EthereumTx = EthereumTx
+  constructor(useInfura=false) {
+    if (useInfura) {
+      this.web3 = new Web3(
+        new Web3.providers.HttpProvider(
+          "https://ropsten.infura.io/8kkr6X3gKuB8cURFQsfa"
+        )
+      )
+
+    } else {
+      this.address = "0x4128f0274cd7794ac18D9C07fF1041e06e91d87f"
+      const web3js = window.web3
+      this.web3 = new Web3(web3js.currentProvider)
+    }
+    this.contract = new this.web3.eth.Contract(abi, this.address)
   }
 
   async newPlayerWithLocalKey(number, power) {
