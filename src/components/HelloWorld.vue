@@ -86,6 +86,7 @@
 <script>
 import HelloWorld from "./helloworld"
 const app = new HelloWorld()
+app.test()
 export default {
   name: 'HelloWorld',
   data () {
