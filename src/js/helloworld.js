@@ -1,8 +1,8 @@
 import Web3 from "web3"
-import * as  abi from "./abi.json"
+import abi from "./abi.json"
 export default class HelloWorld {
   constructor() {
-    this.address = "0x6349266409b761810E8e79619B4BaDe9451a98bB"
+    this.address = "0x4128f0274cd7794ac18D9C07fF1041e06e91d87f"
     const web3js = window.web3
     this.web3 = new Web3(web3js.currentProvider)
     this.contract = new this.web3.eth.Contract(abi, this.address)
@@ -20,24 +20,34 @@ export default class HelloWorld {
     return this.web3.eth.getBlock(block)
   }
 
-  newPlayer(number, power, options) {
+  async newPlayer(number, power) {
+    let options = await this.getOptions()
     return this.contract.methods.newPlayer(number, power).send(options)
   }
 
   getContract(abi, address) {
     return this.contract
   }
+  async getOptions() {
+    let accounts = await this.getAccounts()
+    const options = {
+      from: accounts[0]
+    }
+   return options
+  }
 
   async test() {
 
     let accounts = await this.getAccounts()
     let block = await this.getBlockNumber()
-    const options = {
-      from: accounts[0]
-    }
+    // const options = {
+    //   from: accounts[0]
+    // }
+
     console.log(this.contract)
     console.log(block)
     console.log(accounts)
+
     // console.log(await this.getBlock(block))
     // this.contract = new this.web3.eth.Contract(abi, address)
     // // let block = await this.web3.eth.getBlock()

@@ -28,20 +28,6 @@
     "type": "function"
   },
   {
-    "constant": true,
-    "inputs": [],
-    "name": "random",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "constant": false,
     "inputs": [],
     "name": "winners",
@@ -59,15 +45,11 @@
     "constant": true,
     "inputs": [
       {
-        "name": "_temp",
-        "type": "uint256"
-      },
-      {
-        "name": "_power",
+        "name": "nonce",
         "type": "uint256"
       }
     ],
-    "name": "produceLottoNumber",
+    "name": "random",
     "outputs": [
       {
         "name": "",
@@ -82,11 +64,15 @@
     "constant": true,
     "inputs": [
       {
-        "name": "nonce",
+        "name": "_temp",
+        "type": "uint256"
+      },
+      {
+        "name": "_power",
         "type": "uint256"
       }
     ],
-    "name": "randomWithNonce",
+    "name": "produceLottoNumber",
     "outputs": [
       {
         "name": "",
