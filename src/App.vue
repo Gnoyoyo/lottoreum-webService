@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <video-bg :sources="['./static/img/lottoreum.webm']">
+    <video-bg class="vidoe" :sources="['http://192.168.181.3/static/img/lottoreum.webm']">
       <img src="./assets/logo.png">
       <!-- <div id="nav">
         <router-link to="/">Home</router-link> |
@@ -30,6 +30,11 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 0px;
+}
+body {
   background-color: black;
+}
+.vidoe {
+  overflow: visible !important;
 }
 </style>
