@@ -91,7 +91,7 @@ export default class LottoReum {
 
   async processWinners() {
     let options = await this.getOptions();
-
+    options.gas = 200000
 
     // return new Promise( (resolve, reject) => {
     return this.contract.methods.processWinner().send(options)
@@ -136,6 +136,8 @@ export default class LottoReum {
 
   async clearGame() {
     let options = await this.getOptions()
+    options.gas = 200000
+
     return this.contract.methods.clearGame().send(options)
   }
 
