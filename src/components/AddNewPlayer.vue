@@ -10,7 +10,6 @@
             <button class="button is-medium is-primary" @click="addNewPlayer()">
                   Add New Player
             </button>
-
               <button class="button is-medium is-primary" @click="getPlayers()">
                   getPlayers
             </button>

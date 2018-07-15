@@ -94,6 +94,10 @@ export default class LottoReum {
     return lottoNumber;
   }
 
+  async getWinNumber(){
+
+  }
+
   async getPlayers() {
     const lottoCount = await this.getLottoNumber();
     // console.log(lottoCount)

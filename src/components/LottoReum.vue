@@ -4,26 +4,24 @@
      <br>
      <div class="columns is-mobile is-centered">
         <div class="column is-half is-narrow">
-      <b-table
-          :data="players"
-          :row-class="(row, index) => row.lotto_number === '97' && 'is-info' ">
-              <template slot-scope="props">
-                <b-table-column field="id" label="Player" width="15" :centered="true">
-                   <emoji :emoji="props.row.avatar" set="emojione"></emoji>
-                </b-table-column>
-                <b-table-column field="lotto_number" label="Lotto Number" width="40" numeric :centered="true">
-                    {{ props.row.lotto_number}}
-                </b-table-column>
-              </template>
-      </b-table>
-    </div>
+          <b-table
+            :data="players"
+            :row-class="(row, index) => row.lotto_number === winnumber && 'is-info' ">
+                <template slot-scope="props">
+                  <b-table-column field="id" label="Player" width="15" :centered="true">
+                    <emoji :emoji="props.row.avatar" set="emojione"></emoji>
+                  </b-table-column>
+                  <b-table-column field="lotto_number" label="Lotto Number" width="40" numeric :centered="true">
+                      {{ props.row.lotto_number}}
+                  </b-table-column>
+                </template>
+          </b-table>
+        </div>
      </div>
-
   </div>
 </template>
 <script>
 import Lottereum from "./../js/lottoreum";
-
 export default {
   name: "LotteReum",
   data() {
@@ -33,6 +31,7 @@ export default {
       temp: 0,
       power: 0,
       players: [],
+      winnumber: 0,
       columns: [
         {
           field: "avatar",
@@ -56,14 +55,16 @@ export default {
       this.players = await this.app.getPlayers();
     },
     startGetPlayers() {
-     setInterval(async () => {
+      setInterval(async () => {
         this.getPlayers();
-     }, 1000);
+      }, 1000);
     }
   },
   async mounted() {
     this.app = new Lottereum();
     this.startGetPlayers();
+  },
+  async getWinnumber() {
 
   }
 };
@@ -71,7 +72,7 @@ export default {
 
 <style>
 tr.is-info {
-  background: #167df0;
+  background: #54BF42;
   color: #fff;
 }
 </style>
