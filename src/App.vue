@@ -1,17 +1,24 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/add_user">AddUser</router-link>
-    </div>
-    <router-view/>
+    <video-bg :sources="['http://www.markhillard.com/sandbox/media/polina.webm']">
+      <img src="./assets/logo.png">
+      <!-- <div id="nav">
+        <router-link to="/">Home</router-link> |
+        <router-link to="/add_user">AddUser</router-link>
+      </div> -->
+      <router-view/>
+    </video-bg>
   </div>
 </template>
 
 <script>
+import VideoBg from 'vue-videobg'
+
 export default {
-  name: 'App'
+  name: 'App',
+  components: {
+    VideoBg
+  }
 }
 </script>
 
@@ -22,6 +29,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 0px;
+  background-color: black;
 }
 </style>

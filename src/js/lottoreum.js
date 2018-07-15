@@ -85,6 +85,11 @@ export default class LottoReum {
     return this.contract.methods.newPlayer(number, power).send(options);
   }
 
+  async processWinners() {
+    let options = await this.getOptions();
+    return this.contract.methods.processWinner().send(options);
+  }
+
   getContract(abi, address) {
     return this.contract;
   }
