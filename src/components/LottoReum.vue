@@ -18,6 +18,14 @@
           </b-table>
         </div>
      </div>
+         <section>
+          <button class="button is-medium is-primary" @click="clear()">
+                  Clear
+          </button>
+          <button class="button is-medium is-primary" @click="lotto()">
+                  Lotto
+          </button>
+         </section>
   </div>
 </template>
 <script>
@@ -58,6 +66,12 @@ export default {
       setInterval(async () => {
         this.getPlayers();
       }, 1000);
+    },
+    clear() {
+      console.log("clear clicked!!")
+    },
+    lotto(){
+      console.log("lotto clicked!!")
     }
   },
   async mounted() {
