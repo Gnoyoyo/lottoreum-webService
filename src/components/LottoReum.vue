@@ -27,10 +27,6 @@
           </button>
          </section>
 
-        <div v-if="finalNumber !== 0" style="color:white; font-size:30px;">
-          เลขที่ออก {{ finalNumber }}
-        </div>
-
         <b-modal :active.sync="isImageModalActive">
           <div class="columns is-mobile is-centered modal_final_number">
             <div class="column is-half is-narrow content">
@@ -159,11 +155,11 @@ a {
 .modal_final_number {
   background-color: gray;
   height: 300px;
-  color: white;
   font-size: 30px;
 }
 .modal_final_number .content {
   height: 50px;
   margin-top: 106px;
+  color: white;
 }
 </style>
