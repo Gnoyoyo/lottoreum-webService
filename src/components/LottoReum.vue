@@ -9,10 +9,10 @@
             :row-class="(row, index) => row.lotto_number === winnumber && 'is-info' ">
                 <template slot-scope="props">
                   <b-table-column field="id" label="Player" width="15" :centered="true">
-                    <emoji :emoji="props.row.avatar" set="emojione"></emoji>
+                    <emoji class="emoji" :emoji="props.row.avatar" set="emojione"></emoji>
                   </b-table-column>
                   <b-table-column field="lotto_number" label="Lotto Number" width="40" numeric :centered="true">
-                      {{ props.row.lotto_number}}
+                      <span class="lotto_number">{{ props.row.lotto_number}}</span>
                   </b-table-column>
                 </template>
           </b-table>
@@ -74,6 +74,13 @@ export default {
 tr.is-info {
   background: #54BF42;
   color: #fff;
+}
+.emoji span {
+  width: 45px !important;
+  height: 45px !important;
+}
+.lotto_number {
+  font-size: 30px;
 }
 </style>
 
