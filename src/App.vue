@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <video-bg :sources="['http://www.markhillard.com/sandbox/media/polina.webm']" img="http://www.markhillard.com/sandbox/media/polina.jpg">
+    <video-bg :sources="['http://www.markhillard.com/sandbox/media/polina.webm']">
       <img src="./assets/logo.png">
       <!-- <div id="nav">
         <router-link to="/">Home</router-link> |
@@ -30,5 +30,6 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 0px;
+  background-color: black;
 }
 </style>
