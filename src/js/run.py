@@ -2,6 +2,8 @@ import serial
 import RPi.GPIO as GPIO
 import time
 import subprocess
+import time
+import datetime
 
 def runProcess(command,shell=False):
     import subprocess
@@ -34,13 +36,16 @@ def startSerialPort(cmd):
     print "start reading"
     return ser
 
+def timeStamp():
+   return  datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S')
+
 def main():
   ser =  startSerialPort( 'ls /dev/ttyACM*')
   cmd = '/usr/bin/node ./run.js'
   while True:
       print "-----------------------Ready---------------------------"
       read_ser=ser.readline()
-      print "---------------------------Readed---------------------------"
+      print "-------------Readed-["+timeStamp()+"]---------------------------"
       if len(read_ser) != 0:
           measure = read_ser.split(";")
           last_str = measure[len(measure)-1]
@@ -53,7 +58,7 @@ def main():
           cmdconfig = cmd+" "+temp+"  "+power
           print cmdconfig
           runProcess(cmdconfig, True)
-          print "------------------Sended data to Block----------------------"
+          print "------------------Sended data to Block-["+timeStamp()+"]---------------------"
       else:
           print "reading..."
 
