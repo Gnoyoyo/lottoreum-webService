@@ -2,6 +2,8 @@ import serial
 import RPi.GPIO as GPIO
 import time
 import subprocess
+import time
+import datetime
 
 def runProcess(command,shell=False):
     import subprocess
@@ -9,11 +11,19 @@ def runProcess(command,shell=False):
     return iter(p.stdout.readline, b'')
 
 def convertStrListToFloatList(list_str):
-    list_integer = [int(float(i)) for i in list_str ]
+    list_integer = [float(i) for i in list_str ]
     return list_integer
 
 def generateMagicNumber(list_float):
-    return 0
+    if len(list_float) != 6 :
+        return str(37),str(15)
+    else:
+        list_multiply_hundred = [ int(i * 100) for i in list_float]
+        temp_product = 1
+        for i in list_multiply_hundred[:4]:
+             temp_product = temp_product * i
+        power_product = list_multiply_hundred[4]*list_multiply_hundred[5]
+        return str(temp_product) , str(power_product)
 
 def startSerialPort(cmd):
     output = ""
@@ -26,11 +36,16 @@ def startSerialPort(cmd):
     print "start reading"
     return ser
 
+def timeStamp():
+   return  datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S')
+
 def main():
   ser =  startSerialPort( 'ls /dev/ttyACM*')
+  cmd = '/usr/bin/node ./run.js'
   while True:
+      print "-----------------------Ready---------------------------"
       read_ser=ser.readline()
-      print "---------------------------Readed---------------------------"
+      print "-------------Readed-["+timeStamp()+"]---------------------------"
       if len(read_ser) != 0:
           measure = read_ser.split(";")
           last_str = measure[len(measure)-1]
@@ -39,10 +54,11 @@ def main():
           print measure
           cmdconfig = ""
           measure = convertStrListToFloatList(measure)
-          cmdconfig = cmd+" "+str(measure[0])+"  "+str(measure[1])
+          temp,power = generateMagicNumber(measure)
+          cmdconfig = cmd+" "+temp+"  "+power
           print cmdconfig
           runProcess(cmdconfig, True)
-          print "------------------Sended data to Block----------------------"
+          print "------------------Sended data to Block-["+timeStamp()+"]---------------------"
       else:
           print "reading..."
 
