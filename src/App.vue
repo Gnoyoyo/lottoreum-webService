@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <video-bg :sources="['http://www.markhillard.com/sandbox/media/polina.webm']">
+    <video-bg :sources="['./static/img/lottoreum.webm']">
       <img src="./assets/logo.png">
       <!-- <div id="nav">
         <router-link to="/">Home</router-link> |
