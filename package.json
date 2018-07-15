@@ -5,7 +5,7 @@
   "author": "vorabhol <max003003003@gmail.com>",
   "private": true,
   "scripts": {
-    "dev": "webpack-dev-server --port 8093 --inline --progress --config build/webpack.dev.conf.js",
+    "dev": "webpack-dev-server --port 8094 --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
     "unit": "jest --config test/unit/jest.conf.js --coverage",
     "test": "npm run unit",
