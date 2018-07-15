@@ -3,12 +3,7 @@
     "constant": false,
     "inputs": [],
     "name": "processWinner",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256[]"
-      }
-    ],
+    "outputs": [{ "name": "", "type": "uint256[]" }],
     "payable": false,
     "stateMutability": "nonpayable",
     "type": "function"
@@ -17,12 +12,7 @@
     "constant": true,
     "inputs": [],
     "name": "playerCount",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
+    "outputs": [{ "name": "", "type": "uint256" }],
     "payable": false,
     "stateMutability": "view",
     "type": "function"
@@ -31,54 +21,34 @@
     "constant": false,
     "inputs": [],
     "name": "winners",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256[]"
-      }
-    ],
+    "outputs": [{ "name": "", "type": "uint256[]" }],
     "payable": false,
     "stateMutability": "nonpayable",
     "type": "function"
   },
   {
     "constant": true,
-    "inputs": [
-      {
-        "name": "nonce",
-        "type": "uint256"
-      }
-    ],
+    "inputs": [{ "name": "nonce", "type": "uint256" }],
     "name": "random",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
+    "outputs": [{ "name": "", "type": "uint256" }],
     "payable": false,
     "stateMutability": "view",
     "type": "function"
   },
   {
     "constant": true,
-    "inputs": [
-      {
-        "name": "_temp",
-        "type": "uint256"
-      },
-      {
-        "name": "_power",
-        "type": "uint256"
-      }
-    ],
+    "inputs": [{ "name": "_temp", "type": "uint256" }, { "name": "_power", "type": "uint256" }],
     "name": "produceLottoNumber",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
+    "outputs": [{ "name": "", "type": "uint256" }],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "winnerCount",
+    "outputs": [{ "name": "", "type": "uint256" }],
     "payable": false,
     "stateMutability": "view",
     "type": "function"
@@ -87,77 +57,34 @@
     "constant": true,
     "inputs": [],
     "name": "finalNumber",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
+    "outputs": [{ "name": "", "type": "uint256" }],
     "payable": false,
     "stateMutability": "view",
     "type": "function"
   },
   {
     "constant": true,
-    "inputs": [
-      {
-        "name": "value",
-        "type": "uint256"
-      }
-    ],
+    "inputs": [{ "name": "value", "type": "uint256" }],
     "name": "nonZero",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
+    "outputs": [{ "name": "", "type": "uint256" }],
     "payable": false,
     "stateMutability": "pure",
     "type": "function"
   },
   {
     "constant": false,
-    "inputs": [
-      {
-        "name": "_temp",
-        "type": "uint256"
-      },
-      {
-        "name": "_power",
-        "type": "uint256"
-      }
-    ],
+    "inputs": [{ "name": "_temp", "type": "uint256" }, { "name": "_power", "type": "uint256" }],
     "name": "newPlayer",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
+    "outputs": [{ "name": "", "type": "uint256" }],
     "payable": false,
     "stateMutability": "nonpayable",
     "type": "function"
   },
   {
     "constant": true,
-    "inputs": [
-      {
-        "name": "array",
-        "type": "uint256[]"
-      },
-      {
-        "name": "length",
-        "type": "uint256"
-      }
-    ],
+    "inputs": [{ "name": "array", "type": "uint256[]" }, { "name": "length", "type": "uint256" }],
     "name": "cloneArray",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256[]"
-      }
-    ],
+    "outputs": [{ "name": "", "type": "uint256[]" }],
     "payable": false,
     "stateMutability": "view",
     "type": "function"
@@ -173,19 +100,9 @@
   },
   {
     "constant": true,
-    "inputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
+    "inputs": [{ "name": "", "type": "uint256" }],
     "name": "players",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
+    "outputs": [{ "name": "", "type": "uint256" }],
     "payable": false,
     "stateMutability": "view",
     "type": "function"

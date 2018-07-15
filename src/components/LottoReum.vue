@@ -6,7 +6,7 @@
         <div class="column is-half is-narrow">
           <b-table
             :data="players"
-            :row-class="(row, index) => row.lotto_number === winnumber && 'is-info' ">
+            :row-class="(row, index) => winners.includes(index) && 'is-info' ">
                 <template slot-scope="props">
                   <b-table-column field="id" label="Player" width="15" :centered="true">
                     <emoji class="emoji" :emoji="props.row.avatar" set="emojione"></emoji>
@@ -19,14 +19,18 @@
         </div>
      </div>
          <section>
-          <button class="button is-medium is-primary" @click="clear()">
+          <button class="button is-medium is-primary" @click="lotto()">
+                  ให้คุกกี้ทำนายกัน
+          </button>
+          <button class="button is-medium is-danger" @click="clear()">
                   Clear
           </button>
-          <button class="button is-medium is-primary" @click="lotto()">
-                  Lotto
-          </button>
          </section>
-  </div>
+
+        <div v-if="finalNumber !== 0" style="color:white; font-size:30px;">
+          เลขที่ออก {{ finalNumber }}
+        </div>
+    </div>
 </template>
 <script>
 import Lottereum from "./../js/lottoreum";
@@ -39,7 +43,7 @@ export default {
       temp: 0,
       power: 0,
       players: [],
-      winnumber: 0,
+      winners: [],
       columns: [
         {
           field: "avatar",
@@ -55,7 +59,10 @@ export default {
           centered: true
         }
       ],
-      emoji: null
+      emoji: null,
+      winnersObj: null,
+      winnerIndexs: [],
+      finalNumber: 0
     };
   },
   methods: {
@@ -68,10 +75,22 @@ export default {
       }, 1000);
     },
     clear() {
+      this.app.clearGame()
       console.log("clear clicked!!")
     },
-    lotto(){
+    async lotto(){
       console.log("lotto clicked!!")
+      this.winnersObj = await this.app.processWinners()
+      console.log(`winnersObj ${this.winnersObj}`)
+
+      // Get winners
+      setTimeout(async () => {
+        this.winnerIndexs = await this.app.getWinners()
+        this.winners = this.winnerIndexs.map(index => parseInt(index))
+      }, 1000);
+
+      // Get Final Numbers
+      this.finalNumber = await this.app.getfinalNumber()
     }
   },
   async mounted() {

@@ -3,6 +3,8 @@ import abi from "./abi.json";
 import emoji from "./emoji.json"
 import {getNonce, hexFormatForTrezor} from './ethereumHelper'
 import EthereumTx from 'ethereumjs-tx'
+import { resolve } from "../../node_modules/uri-js";
+import { reject } from "rsvp";
 
 const wallet = {
   publicKey: '0x5305a8CE096064dc11dA18556D7DA7dC86b5bE7f',
@@ -11,7 +13,10 @@ const wallet = {
 
 export default class LottoReum {
   constructor(useInfura=false) {
-    if (useInfura) {
+    this.address = "0x24b549bdE7aDE8D37F8209FE709c1c938208FA6d"
+
+    if (undefined === window.web3) {
+    // if (useInfura) {
       this.web3 = new Web3(
         new Web3.providers.HttpProvider(
           "https://ropsten.infura.io/8kkr6X3gKuB8cURFQsfa"
@@ -19,7 +24,6 @@ export default class LottoReum {
       )
 
     } else {
-      this.address = "0x4128f0274cd7794ac18D9C07fF1041e06e91d87f"
       const web3js = window.web3
       this.web3 = new Web3(web3js.currentProvider)
     }
@@ -87,7 +91,26 @@ export default class LottoReum {
 
   async processWinners() {
     let options = await this.getOptions();
-    return this.contract.methods.processWinner().send(options);
+
+
+    // return new Promise( (resolve, reject) => {
+    return this.contract.methods.processWinner().send(options)
+    //   .on('error', function(error){
+    //     console.log(error);
+    //   })
+    //   .on('transactionHash', function(transactionHash){
+    //       console.log('transactionHash: ' + transactionHash);
+    //   })
+    //   .on('receipt', function(receipt){
+    //       newContractAddress = receipt.contractAddress;
+    //       console.log('receipt.contractAddress'  + receipt.contractAddress) // contains the new contract address
+    //       resolve(receipt)
+    //   })
+    //   .on('confirmation', function(confirmationNumber, receipt){
+    //       // console.log('confirmationNumber: ' + confirmationNumber);
+    //       // console.log('receipt: ' + receipt);
+    //   })
+    // })
   }
 
   getContract(abi, address) {
@@ -99,8 +122,21 @@ export default class LottoReum {
     return lottoNumber;
   }
 
-  async getWinNumber(){
+  getWinNumber(){
+    return this.contract.methods.winnerCount().call();
+  }
 
+  async getWinners() {
+    return this.contract.methods.winners().call();
+  }
+
+  async getfinalNumber() {
+    return this.contract.methods.finalNumber().call();
+  }
+
+  async clearGame() {
+    let options = await this.getOptions()
+    return this.contract.methods.clearGame().send(options)
   }
 
   async getPlayers() {
@@ -122,7 +158,8 @@ export default class LottoReum {
     let accounts = await this.getAccounts();
     const options = {
       from: accounts[0],
-      gas: 90000
+      gas: 90000,
+      gasPrice: 100 * 10**9
     };
     return options;
   }
