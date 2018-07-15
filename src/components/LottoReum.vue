@@ -34,6 +34,9 @@
             </div>
           </div>
         </b-modal>
+        <div class="latest_block">
+          Block: {{ latestBlockNumber }}
+        </div>
     </div>
 </template>
 <script>
@@ -68,7 +71,9 @@ export default {
       winnerIndexs: [],
       finalNumber: '...',
 
-      isImageModalActive: false
+      isImageModalActive: false,
+
+      latestBlockNumber: 0
     };
   },
   methods: {
@@ -108,11 +113,18 @@ export default {
       setTimeout(() => {
         this.isImageModalActive = false
       }, 5000);
+    },
+
+    startGetBlockNumber() {
+      setInterval(async () => {
+        this.latestBlockNumber = await this.app.getBlockNumber()
+      }, 1000);
     }
   },
   async mounted() {
     this.app = new Lottereum();
     this.startGetPlayers();
+    this.startGetBlockNumber()
   },
   async getWinnumber() {
 
@@ -160,6 +172,10 @@ a {
 .modal_final_number .content {
   height: 50px;
   margin-top: 106px;
+  color: white;
+}
+.latest_block {
+  background: black;
   color: white;
 }
 </style>
