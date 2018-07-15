@@ -26,7 +26,7 @@ export default {
   name: "LotteReum",
   data() {
     return {
-      msg: "Welcome to Lottereum",
+      msg: "",
       app: null,
       temp: 0,
       power: 0,
