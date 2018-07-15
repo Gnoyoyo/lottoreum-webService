@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <video-bg class="vidoe" :sources="['http://192.168.181.3/static/img/lottoreum.webm']">
+    <video-bg class="vidoe" :sources="['./static/img/lottoreum.webm']">
       <img src="./assets/logo.png">
       <!-- <div id="nav">
         <router-link to="/">Home</router-link> |
