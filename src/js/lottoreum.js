@@ -43,7 +43,7 @@ export default class LottoReum {
         nonce: '0x' + hexFormatForTrezor( this.web3.utils.toHex(nonce) ),
         gasPrice: '0x174876E800', // 10 gwei = 0x02540BE400,  25 gwei = 5D21DBA00,   50 gwei = BA43B7400,   100 gwei = 174876E800
         gasLimit: '0x1F47D0',
-        to: '0x4128f0274cd7794ac18d9c07ff1041e06e91d87f',
+        to: this.address,
         value: '0x00',
         data: data,
         // EIP 155 chainId - mainnet: 1, ropsten: 3
