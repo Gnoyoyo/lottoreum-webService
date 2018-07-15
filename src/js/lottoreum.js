@@ -15,7 +15,7 @@ export default class LottoReum {
   constructor(useInfura=false) {
     this.address = "0x24b549bdE7aDE8D37F8209FE709c1c938208FA6d"
 
-    if (undefined === window.web3) {
+    if (useInfura || undefined === window.web3) {
     // if (useInfura) {
       this.web3 = new Web3(
         new Web3.providers.HttpProvider(
