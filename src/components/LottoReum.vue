@@ -30,6 +30,14 @@
         <div v-if="finalNumber !== 0" style="color:white; font-size:30px;">
           เลขที่ออก {{ finalNumber }}
         </div>
+
+        <b-modal :active.sync="isImageModalActive">
+          <div class="columns is-mobile is-centered modal_final_number">
+            <div class="column is-half is-narrow content">
+              เลขที่ออก {{ finalNumber }}
+            </div>
+          </div>
+        </b-modal>
     </div>
 </template>
 <script>
@@ -62,7 +70,9 @@ export default {
       emoji: null,
       winnersObj: null,
       winnerIndexs: [],
-      finalNumber: 0
+      finalNumber: '...',
+
+      isImageModalActive: false
     };
   },
   methods: {
@@ -80,8 +90,15 @@ export default {
     },
     async lotto(){
       console.log("lotto clicked!!")
+
+      // Show modal
+      this.finalNumber = '...'
+      this.isImageModalActive = true
+
+      // Find winners
       this.winnersObj = await this.app.processWinners()
       console.log(`winnersObj ${this.winnersObj}`)
+
 
       // Get winners
       setTimeout(async () => {
@@ -91,6 +108,10 @@ export default {
 
       // Get Final Numbers
       this.finalNumber = await this.app.getfinalNumber()
+
+      setTimeout(() => {
+        this.isImageModalActive = false
+      }, 5000);
     }
   },
   async mounted() {
@@ -134,5 +155,15 @@ li {
 }
 a {
   color: #42b983;
+}
+.modal_final_number {
+  background-color: gray;
+  height: 300px;
+  color: white;
+  font-size: 30px;
+}
+.modal_final_number .content {
+  height: 50px;
+  margin-top: 106px;
 }
 </style>
